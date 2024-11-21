@@ -19,15 +19,15 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsAdminUserOrSuperuser]
 
     # modifier le mot de passe de l'utilisateur
-    @action(detail=True, methods=['POST'])
-    def set_password(self, request, pk=None):
-        user = self.get_object()
-        new_password = request.data.get('password')
-        if new_password:
-            user.set_password(new_password)
-            user.save()
-            return Response({"status": "Mot de passe mis à jour"}, status=status.HTTP_200_OK)
-        return Response({"error": "Mot de passe manquant"}, status=status.HTTP_400_BAD_REQUEST),
+@action(detail=True, methods=['POST'])
+def set_password(self, request, pk=None):
+    user = self.get_object()
+    new_password = request.data.get('password')
+    if new_password:
+        user.set_password(new_password)
+        user.save()
+        return Response({"status": "Mot de passe mis à jour"}, status=status.HTTP_200_OK)
+    return Response({"error": "Mot de passe manquant"}, status=status.HTTP_400_BAD_REQUEST),
 
 
 @api_view(['POST'])
